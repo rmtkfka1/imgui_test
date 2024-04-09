@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{f4928a59-9415-4d46-9b82-4754993e8479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GAME">
+      <UniqueIdentifier>{9f1f1567-75b7-4f00-b598-0e832ab1ff6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\3">
+      <UniqueIdentifier>{171fa849-1ac3-4643-ad0b-eedfb34b9224}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Clinet.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>GAME</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imgui.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imgui_impl_dx12.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imgui_impl_win32.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imgui_internal.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imstb_rectpack.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imstb_textedit.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imstb_truetype.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Library\Include\Imgui\imconfig.h">
+      <Filter>Utils\3</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Clinet.cpp">
+      <Filter>GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMath.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui_demo.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui_draw.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui_impl_dx12.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui_impl_win32.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui_tables.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui_widgets.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Library\Include\Imgui\imgui.cpp">
+      <Filter>Utils\3</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Clinet.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Clinet.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>Utils</Filter>
+    </None>
+  </ItemGroup>
+</Project>
