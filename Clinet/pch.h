@@ -64,3 +64,11 @@ struct WindowInfo
 	HWND hwnd;
 
 };
+
+struct Vertex
+{
+	vec3 pos;
+	vec4 color;
+};
+
+extern unique_ptr<class Core> core;

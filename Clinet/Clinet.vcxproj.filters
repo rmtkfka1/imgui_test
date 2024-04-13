@@ -8,10 +8,19 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{f4928a59-9415-4d46-9b82-4754993e8479}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GAME">
+    <Filter Include="Engine">
+      <UniqueIdentifier>{6282ee5b-161d-42c3-95a1-804ddeec4d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
       <UniqueIdentifier>{9f1f1567-75b7-4f00-b598-0e832ab1ff6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utils\3">
+    <Filter Include="Resource">
+      <UniqueIdentifier>{d593f6eb-79fd-456c-bbaa-910a6867425a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{b4f53eaf-e3a3-434b-898b-4053c3fd4c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\IMGUI">
       <UniqueIdentifier>{171fa849-1ac3-4643-ad0b-eedfb34b9224}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -31,9 +40,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>GAME</Filter>
-    </ClInclude>
     <ClInclude Include="d3dx12.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -41,28 +47,43 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imgui.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imgui_impl_dx12.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imgui_impl_win32.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imgui_internal.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imstb_rectpack.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imstb_textedit.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imstb_truetype.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Library\Include\Imgui\imconfig.h">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RootSignature.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -70,34 +91,46 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="Clinet.cpp">
-      <Filter>GAME</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>GAME</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="SimpleMath.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui_demo.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui_draw.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui_impl_dx12.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui_impl_win32.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui_tables.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui_widgets.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Library\Include\Imgui\imgui.cpp">
-      <Filter>Utils\3</Filter>
+      <Filter>Utils\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RootSignature.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +149,9 @@
   <ItemGroup>
     <None Include="SimpleMath.inl">
       <Filter>Utils</Filter>
+    </None>
+    <None Include="..\Resources\Shader\default.hlsli">
+      <Filter>Resource\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>
