@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ConstantBuffer.h"
 #include "Core.h"
-
+#include "TableHeap.h"
 ConstantBuffer::ConstantBuffer()
 {
 }
@@ -19,10 +19,11 @@ ConstantBuffer::~ConstantBuffer()
 
 
 
-void ConstantBuffer::Init(uint32 size, uint32 count)
+void ConstantBuffer::Init(CBV_REGISTER reg,uint32 size, uint32 count)
 {
 	// 상수 버퍼는 256 바이트 배수로 만들어야 한다
 	// 0 256 512 768
+	_reg = reg;
 	_elementSize = (size + 255) & ~255;
 	_elementCount = count;
 
@@ -79,7 +80,7 @@ void ConstantBuffer::Clear()
 	_currentIndex = 0;
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(void* buffer, uint32 size)
+void ConstantBuffer::PushData(void* buffer, uint32 size)
 {
 	assert(_currentIndex <  _elementCount);
 
@@ -87,9 +88,20 @@ D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(void* buffer, uint32 size)
 
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(_cpuHandleBegin, _currentIndex * _handleIncrementSize);
 
+	core->GetTableHeap()->SetCBV(cpuHandle, _reg);
+
 	_currentIndex++;
 
-	return cpuHandle;
+
+}
+
+void ConstantBuffer::SetData(void* buffer, uint32 size)
+{
+
+	assert(_elementSize == ((size + 255) & ~255));
+
+	::memcpy(&_mappedBuffer[0], buffer, size);
+	core->GetCmdList()->SetGraphicsRootConstantBufferView(0, _cbvBuffer->GetGPUVirtualAddress());
 }
 
 

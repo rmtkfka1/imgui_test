@@ -14,12 +14,13 @@ void RootSignature::Init()
 
 	CD3DX12_DESCRIPTOR_RANGE ranges[] =
 	{
-		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT, 0), // b0~b4
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT-1, 1), // b1~b4
 	};
 
 
-	CD3DX12_ROOT_PARAMETER param[1];
-	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
+	CD3DX12_ROOT_PARAMETER param[2];
+	param[0].InitAsConstantBufferView(0); // b0
+	param[1].InitAsDescriptorTable(_countof(ranges), ranges);
 
 
 	D3D12_ROOT_SIGNATURE_FLAGS d3dRootSignatureFlags =

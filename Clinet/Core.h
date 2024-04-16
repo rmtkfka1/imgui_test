@@ -10,9 +10,7 @@ class Core
 public:
 
 	void Init(WindowInfo info);
-
 	void Update();
-
 	void StartRender();
 	void EndRender();
 
@@ -24,7 +22,7 @@ public:
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	shared_ptr<RootSignature> GetRootSignature() { return _rootSignautre; }
-	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _constantBuffer; }
+	shared_ptr<ConstantBuffer> GetConstantBuffer(CBV_REGISTER type) { return _constantBuffers[static_cast<uint8>(type)]; }
 	shared_ptr<TableHeap> GetTableHeap() { return _tableHeap; }
 	ComPtr<ID3D12DescriptorHeap> GetImguiHeap() { return _imguiHeap; }
 	
@@ -36,8 +34,7 @@ private:
 	HRESULT CreateDevice();
 	HRESULT CreateCmdQueue();
 	HRESULT CreateSwapChain();
-
-
+	void CreateConstantBuffer(CBV_REGISTER reg, uint32 bufferSize, uint32 count);
 
 
 
@@ -69,9 +66,8 @@ private:
 
 
 private:
-
+	vector<shared_ptr<ConstantBuffer>> _constantBuffers;
 	shared_ptr<RootSignature> _rootSignautre;
-	shared_ptr<ConstantBuffer> _constantBuffer;
 	shared_ptr<TableHeap> _tableHeap;
 
 private:

@@ -25,8 +25,8 @@ void Core::Init(WindowInfo info)
 	_rootSignautre = make_unique<RootSignature>();
 	_rootSignautre->Init();
 
-	_constantBuffer = make_unique<ConstantBuffer>();
-	_constantBuffer->Init(sizeof(cb), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(cb), 1);
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(cb), 256);
 
 	_tableHeap = make_unique<TableHeap>();
 	_tableHeap->Init(256);
@@ -62,7 +62,14 @@ void Core::StartRender()
 
 
 		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetRootSignature().Get());
-		_constantBuffer->Clear();
+		
+		/*for (auto& v : _constantBuffers)
+		{
+			v->Clear();
+		}*/
+
+		GetConstantBuffer(CBV_REGISTER::b1)->Clear();
+
 		_tableHeap->Clear();
 
 		_cmdList->SetDescriptorHeaps(1, _tableHeap->GetDescriptorHeap().GetAddressOf());
@@ -229,5 +236,15 @@ HRESULT Core::CreateSwapChain()
 	}
 	return result;
 
+}
+
+void Core::CreateConstantBuffer(CBV_REGISTER reg, uint32 bufferSize, uint32 count)
+{
+	uint8 typeInt = static_cast<uint8>(reg);
+	assert(_constantBuffers.size() == typeInt);
+
+	shared_ptr<ConstantBuffer> buffer = make_shared<ConstantBuffer>();
+	buffer->Init(reg, bufferSize, count);
+	_constantBuffers.push_back(buffer);
 }
 

@@ -73,9 +73,6 @@
     <ClInclude Include="..\Library\Include\Imgui\imconfig.h">
       <Filter>Utils\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Core.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="TableHeap.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
