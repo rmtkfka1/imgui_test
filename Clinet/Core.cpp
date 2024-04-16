@@ -4,6 +4,7 @@
 #include "ImguiManager.h"
 #include "TimeManager.h"
 #include "KeyManager.h"
+#include "ConstantBuffer.h"
 void Core::Init(WindowInfo info)
 {
 	_info = info;
@@ -19,8 +20,12 @@ void Core::Init(WindowInfo info)
 	CreateCmdQueue();
 	CreateSwapChain();
 
+
 	_rootSignautre = make_unique<RootSignature>();
 	_rootSignautre->Init();
+
+	_constantBuffer = make_unique<ConstantBuffer>();
+	_constantBuffer->Init(256,10);
 
 	ImguiManager::GetInstance()->Init();
 	KeyManager::GetInstance()->Init(info.hwnd);
@@ -49,10 +54,12 @@ void Core::StartRender()
 			_rtvBuffer[_backBufferIndex].Get(),
 			D3D12_RESOURCE_STATE_PRESENT, // 화면 출력
 			D3D12_RESOURCE_STATE_RENDER_TARGET); // 외주 결과물
-
 		_cmdList->ResourceBarrier(1, &barrier);
-		_cmdList->SetDescriptorHeaps(1, core->GetImguiHeap().GetAddressOf());
+
+
 		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetRootSignature().Get());
+		_cmdList->SetDescriptorHeaps(1, core->GetImguiHeap().GetAddressOf());
+		_constantBuffer->Clear();
 
 		_cmdList->RSSetViewports(1, &_viewport);
 		_cmdList->RSSetScissorRects(1, &_scissorRect);

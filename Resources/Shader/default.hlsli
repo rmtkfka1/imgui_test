@@ -4,6 +4,12 @@ cbuffer TEST0 : register(b0)
     float4 offset;
 };
 
+
+cbuffer TEST1 : register(b1)
+{
+    float4 offset1;
+};
+
 struct VS_IN
 {
     float3 pos : POSITION;
@@ -25,6 +31,9 @@ VS_OUT VS_Main(VS_IN input)
     output.pos += offset;
     
     output.color = input.color;
+    
+    output.color += offset1;
+    
 
     return output;
 }

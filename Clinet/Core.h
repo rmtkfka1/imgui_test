@@ -2,6 +2,7 @@
 
 
 class RootSignature;
+class ConstantBuffer;
 
 class Core
 {
@@ -22,7 +23,9 @@ public:
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	shared_ptr<RootSignature> GetRootSignature() { return _rootSignautre; }
+	shared_ptr<ConstantBuffer> GetConstantBuffer() { return _constantBuffer; }
 	ComPtr<ID3D12DescriptorHeap> GetImguiHeap() { return _imguiHeap; }
+	
 
 private:
 
@@ -46,23 +49,27 @@ private:
 	ComPtr<ID3D12GraphicsCommandList> _cmdList;
 	ComPtr<ID3D12CommandAllocator> _cmdMemory;
 
-	ComPtr<ID3D12DescriptorHeap> _imguiHeap;
-
 	ComPtr<ID3D12Fence>					_fence;
 	uint32								_fenceValue = 0;
 	HANDLE								_fenceEvent = INVALID_HANDLE_VALUE;
 
 
+	ComPtr<ID3D12DescriptorHeap> _imguiHeap;
+	//SwapChain
 	ComPtr<IDXGISwapChain> _swapChain;
 	array<ComPtr<ID3D12Resource>, 2> _rtvBuffer;
 	ComPtr<ID3D12DescriptorHeap> _rtvHeap;
 	array< D3D12_CPU_DESCRIPTOR_HANDLE, 2> _rtvHandle;
 	uint32					_backBufferIndex = 0;
 
+
+
+
+
 private:
 
 	shared_ptr<RootSignature> _rootSignautre;
-
+	shared_ptr<ConstantBuffer> _constantBuffer;
 
 private:
 

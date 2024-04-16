@@ -4,20 +4,18 @@
 void RootSignature::Init()
 {
 
-	D3D12_ROOT_PARAMETER param[2];
+	//D3D12_ROOT_PARAMETER param[1];
 
-	param[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
-	param[0].Constants.Num32BitValues = 4;
-	param[0].Constants.ShaderRegister = 0;
-	param[0].Constants.RegisterSpace = 0;
-	param[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+		//param[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
+	//param[0].Constants.Num32BitValues = 4;
+	//param[0].Constants.ShaderRegister = 0;
+	//param[0].Constants.RegisterSpace = 0;
+	//param[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 
-	param[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
-	param[1].Constants.Num32BitValues = 32;
-	param[1].Constants.ShaderRegister = 1;
-	param[1].Constants.RegisterSpace = 0;
-	param[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	CD3DX12_ROOT_PARAMETER param[2];
 
+	param[0].InitAsConstants(4, 0);
+	param[1].InitAsConstantBufferView(1);
 
 
 	D3D12_ROOT_SIGNATURE_FLAGS d3dRootSignatureFlags =

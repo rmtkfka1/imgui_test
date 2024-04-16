@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Mesh.h"
 #include "Core.h"
+#include "ConstantBuffer.h"
 
 Mesh::Mesh() 
 {
@@ -15,7 +16,7 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 
 
 	test.offset = { 0.0,0.0,0.0,0.0 };
-
+	test2.offset = { 0,0,0,0 };
 
 }
 
@@ -27,18 +28,22 @@ void Mesh::Render()
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
 	{
 		test.offset.x += 0.3f* dt;
+		test2.offset.x += 1.0f * dt;
 	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
 	{
 		test.offset.x -= 0.3f * dt;
+		test2.offset.x -= 1.0f * dt;
 	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
 	{
 		test.offset.y += 0.3f * dt;
+		test2.offset.y += 1.0f * dt;
 	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
 	{
 		test.offset.y -= 0.3f * dt;
+		test2.offset.y -= 1.0f * dt;
 	}
 
 
@@ -47,7 +52,7 @@ void Mesh::Render()
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
 	core->GetCmdList()->SetGraphicsRoot32BitConstants(0, 4, &test, 0);
-
+	core->GetConstantBuffer()->PushData(1, &test2, sizeof(test2));
 	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
 }
 

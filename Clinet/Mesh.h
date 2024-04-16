@@ -28,6 +28,8 @@ private:
 
 
 	cb test;
+	cb test2;
+
 
 
 };
