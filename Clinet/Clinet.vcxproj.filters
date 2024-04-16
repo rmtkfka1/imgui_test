@@ -23,9 +23,6 @@
     <Filter Include="Utils\IMGUI">
       <UniqueIdentifier>{171fa849-1ac3-4643-ad0b-eedfb34b9224}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Manager">
-      <UniqueIdentifier>{d28d7426-de32-4aa2-96e7-98acb50794ef}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clinet.h">
@@ -88,18 +85,6 @@
     <ClInclude Include="Mesh.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="ImguiManager.h">
-      <Filter>Engine\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyManager.h">
-      <Filter>Engine\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>Engine\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -145,18 +130,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ImguiManager.cpp">
-      <Filter>Engine\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyManager.cpp">
-      <Filter>Engine\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
-      <Filter>Engine\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>

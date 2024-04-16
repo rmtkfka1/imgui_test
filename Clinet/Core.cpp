@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "Core.h"
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_win32.h"
+#include "Imgui/imgui_impl_dx12.h"
 #include "RootSignature.h"
-#include "ImguiManager.h"
-#include "TimeManager.h"
-#include "KeyManager.h"
-#include "ConstantBuffer.h"
 void Core::Init(WindowInfo info)
 {
 	_info = info;
@@ -20,32 +19,17 @@ void Core::Init(WindowInfo info)
 	CreateCmdQueue();
 	CreateSwapChain();
 
-
 	_rootSignautre = make_unique<RootSignature>();
 	_rootSignautre->Init();
 
-	_constantBuffer = make_unique<ConstantBuffer>();
-	_constantBuffer->Init(256,10);
-
-	//ImguiManager::GetInstance()->Init();
-	KeyManager::GetInstance()->Init(info.hwnd);
-	TimeManager::GetInstance()->Init();
+	CreateIMGUI();
 
 
-
-}
-
-void Core::Update()
-{
-	KeyManager::GetInstance()->Update();
-	TimeManager::GetInstance()->Update();
 }
 
 
 void Core::StartRender()
 {
-
-
 	{
 		_cmdMemory->Reset();
 		_cmdList->Reset(_cmdMemory.Get(), nullptr);
@@ -54,16 +38,15 @@ void Core::StartRender()
 			_rtvBuffer[_backBufferIndex].Get(),
 			D3D12_RESOURCE_STATE_PRESENT, // 화면 출력
 			D3D12_RESOURCE_STATE_RENDER_TARGET); // 외주 결과물
+
 		_cmdList->ResourceBarrier(1, &barrier);
+		_cmdList->SetDescriptorHeaps(1, g_pd3dSrvDescHeap.GetAddressOf());
 
-
-		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetRootSignature().Get());
-		_cmdList->SetDescriptorHeaps(1, core->GetConstantBuffer()->GetTabledescHeap().GetAddressOf());
-
-		_constantBuffer->Clear();
 
 		_cmdList->RSSetViewports(1, &_viewport);
 		_cmdList->RSSetScissorRects(1, &_scissorRect);
+
+
 		D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = _rtvHandle[_backBufferIndex];
 		_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
 		_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
@@ -71,11 +54,13 @@ void Core::StartRender()
 
 	}
 
+
 }
 
 void Core::EndRender()
 {
-	/*ImguiManager::GetInstance()->Render();*/
+	ImguiPrint();
+	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), _cmdList.Get());
 
 	{
 		D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
@@ -102,7 +87,52 @@ void Core::EndRender()
 	}
 }
 
+void Core::ImguiPrint()
+{
+	ImGui_ImplDX12_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	
 
+	if (show_demo_window)
+		ImGui::ShowDemoWindow(&show_demo_window);
+
+	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+	{
+		static float f = 0.0f;
+		static int counter = 0;
+
+		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+		ImGui::Checkbox("Another Window", &show_another_window);
+
+		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+			counter++;
+
+		ImGui::SameLine();
+		ImGui::Text("counter = %d", counter);
+
+		//ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+		ImGui::End();
+	}
+
+	// 3. Show another simple window.
+	if (show_another_window)
+	{
+		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+		ImGui::Text("Hello from another window!");
+		if (ImGui::Button("Close Me"))
+			show_another_window = false;
+		ImGui::End();
+	}
+
+	ImGui::Render();
+}
 
 void Core::WaitSync()
 {
@@ -213,10 +243,28 @@ HRESULT Core::CreateSwapChain()
 		desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 		desc.NumDescriptors = 1;
 		desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-		_device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&_imguiHeap));
+		_device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&g_pd3dSrvDescHeap));
 
 	}
 	return result;
 
+}
+
+void Core::CreateIMGUI()
+{
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+	// Setup Dear ImGui style
+	ImGui::StyleColorsDark();
+	// Setup Platform/Renderer backends
+	ImGui_ImplWin32_Init(_info.hwnd);
+	ImGui_ImplDX12_Init(_device.Get(), 2,
+		DXGI_FORMAT_R8G8B8A8_UNORM, g_pd3dSrvDescHeap.Get(),
+		g_pd3dSrvDescHeap->GetCPUDescriptorHandleForHeapStart(),
+		g_pd3dSrvDescHeap->GetGPUDescriptorHandleForHeapStart());
 }
 
