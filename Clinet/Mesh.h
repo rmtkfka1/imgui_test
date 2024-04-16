@@ -27,5 +27,8 @@ private:
 	uint32 _indexCount = 0;
 
 
+	cb test;
+
+
 };
 
