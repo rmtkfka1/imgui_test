@@ -12,10 +12,18 @@ void RootSignature::Init()
 	//param[0].Constants.RegisterSpace = 0;
 	//param[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 
-	CD3DX12_ROOT_PARAMETER param[2];
+	CD3DX12_DESCRIPTOR_RANGE range[]
+	{
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV,3,0), // b0 b1 b2
+	};
 
-	param[0].InitAsConstants(4, 0);
-	param[1].InitAsConstantBufferView(1);
+
+	CD3DX12_ROOT_PARAMETER param[3];
+
+	param[0].InitAsDescriptorTable(_countof(range), range);
+	param[1].InitAsConstantBufferView(4);
+	param[2].InitAsConstants(4, 3);
+
 
 
 	D3D12_ROOT_SIGNATURE_FLAGS d3dRootSignatureFlags =
@@ -30,7 +38,7 @@ void RootSignature::Init()
 	desc.NumParameters = _countof(param);
 	desc.pParameters = param;
 	desc.NumStaticSamplers = 0;
-	desc.pStaticSamplers = NULL;
+	desc.pStaticSamplers = nullptr;
 	desc.Flags = d3dRootSignatureFlags;
 
 

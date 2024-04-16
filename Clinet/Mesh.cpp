@@ -51,8 +51,10 @@ void Mesh::Render()
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
-	core->GetCmdList()->SetGraphicsRoot32BitConstants(0, 4, &test, 0);
-	core->GetConstantBuffer()->PushData(1, &test2, sizeof(test2));
+	//core->GetCmdList()->SetGraphicsRoot32BitConstants(0, 4, &test, 0);
+	core->GetConstantBuffer()->PushData(0, &test2, sizeof(test2));
+	core->GetConstantBuffer()->PushTable(0);
+
 	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
 }
 

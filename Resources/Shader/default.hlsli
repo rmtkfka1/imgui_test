@@ -10,6 +10,10 @@ cbuffer TEST1 : register(b1)
     float4 offset1;
 };
 
+cbuffer TEST2 : register(b2)
+{
+    float4 offset2;
+};
 struct VS_IN
 {
     float3 pos : POSITION;

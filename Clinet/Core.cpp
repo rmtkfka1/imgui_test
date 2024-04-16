@@ -27,7 +27,7 @@ void Core::Init(WindowInfo info)
 	_constantBuffer = make_unique<ConstantBuffer>();
 	_constantBuffer->Init(256,10);
 
-	ImguiManager::GetInstance()->Init();
+	//ImguiManager::GetInstance()->Init();
 	KeyManager::GetInstance()->Init(info.hwnd);
 	TimeManager::GetInstance()->Init();
 
@@ -58,7 +58,8 @@ void Core::StartRender()
 
 
 		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetRootSignature().Get());
-		_cmdList->SetDescriptorHeaps(1, core->GetImguiHeap().GetAddressOf());
+		_cmdList->SetDescriptorHeaps(1, core->GetConstantBuffer()->GetTabledescHeap().GetAddressOf());
+
 		_constantBuffer->Clear();
 
 		_cmdList->RSSetViewports(1, &_viewport);
@@ -74,7 +75,7 @@ void Core::StartRender()
 
 void Core::EndRender()
 {
-	ImguiManager::GetInstance()->Render();
+	/*ImguiManager::GetInstance()->Render();*/
 
 	{
 		D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
