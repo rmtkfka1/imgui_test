@@ -150,17 +150,22 @@
     <ClInclude Include="..\Library\Include\Imgui\imstb_textedit.h" />
     <ClInclude Include="..\Library\Include\Imgui\imstb_truetype.h" />
     <ClInclude Include="Clinet.h" />
+    <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ImguiManager.h" />
+    <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RootSignature.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SimpleMath.h" />
+    <ClInclude Include="TableHeap.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Library\Include\Imgui\imgui.cpp" />
@@ -171,8 +176,11 @@
     <ClCompile Include="..\Library\Include\Imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Library\Include\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="Clinet.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ImguiManager.cpp" />
+    <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -183,6 +191,8 @@
     <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SimpleMath.cpp" />
+    <ClCompile Include="TableHeap.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Clinet.rc" />

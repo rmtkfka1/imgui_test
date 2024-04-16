@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "Mesh.h"
 #include "Core.h"
-
+#include "ConstantBuffer.h"
+#include "TableHeap.h"
 Mesh::Mesh() 
 {
 }
@@ -14,15 +15,46 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 	CreateIndexBuffer(index);
 
 
+	test.offset = { 0.0,0.0,0.0,0.0 };
+	test2.offset = { 0,0,0,0 };
 
 }
 
 void Mesh::Render()
 {
+
+	float dt = TimeManager::GetInstance()->GetDeltaTime();
+
+	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
+	{
+		test.offset.x += 0.3f* dt;
+		test2.offset.x += 1.0f * dt;
+	}
+	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
+	{
+		test.offset.x -= 0.3f * dt;
+		test2.offset.x -= 1.0f * dt;
+	}
+	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
+	{
+		test.offset.y += 0.3f * dt;
+		test2.offset.y += 1.0f * dt;
+	}
+	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
+	{
+		test.offset.y -= 0.3f * dt;
+		test2.offset.y -= 1.0f * dt;
+	}
+
+
 	core->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
+	D3D12_CPU_DESCRIPTOR_HANDLE handle = core->GetConstantBuffer()->PushData(&test, sizeof(test));
+	core->GetTableHeap()->SetCBV(handle, CBV_REGISTER::b0);
+
+	core->GetTableHeap()->CommitTable();
 	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
 }
 

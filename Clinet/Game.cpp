@@ -3,7 +3,7 @@
 #include "Core.h"
 #include "Shader.h"
 #include "Mesh.h"
-
+#include "ImguiManager.h"
 unique_ptr<Shader> _shader = make_unique<Shader>();
 unique_ptr<Mesh> _mesh = make_unique<Mesh>();
 
@@ -47,10 +47,14 @@ void Game::Init(WindowInfo info)
 
 void Game::Run()
 {
+	core->Update();
+
 	core->StartRender();
 
+	
 	_shader->SetPipelineState();
 	_mesh->Render();
+
 
 	core->EndRender();
 }
