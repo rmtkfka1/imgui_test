@@ -90,7 +90,6 @@ void Core::StartRender()
 
 void Core::EndRender()
 {
-
 	_cmdList->SetDescriptorHeaps(1, _imguiHeap.GetAddressOf());
 
 	ImguiManager::GetInstance()->Render();
@@ -121,6 +120,22 @@ void Core::EndRender()
 }
 
 
+
+void Core::ResourceSet()
+{
+
+	_resCmdList->Close();
+
+	ID3D12CommandList* cmdListArr[] = { _resCmdList.Get() };
+	_cmdQueue->ExecuteCommandLists(_countof(cmdListArr), cmdListArr);
+
+	WaitSync();
+
+	_resCmdMemory->Reset();
+	_resCmdList->Reset(_resCmdMemory.Get(), nullptr);
+
+
+}
 
 void Core::WaitSync()
 {
@@ -169,6 +184,9 @@ HRESULT Core::CreateCmdQueue()
 	result=_device->CreateCommandQueue(&desc, IID_PPV_ARGS(&_cmdQueue));
 	result=_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdMemory));
 	result=_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _cmdMemory.Get(), nullptr, IID_PPV_ARGS(&_cmdList));
+
+	result = _device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_resCmdMemory));
+	result = _device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _resCmdMemory.Get(), nullptr, IID_PPV_ARGS(&_resCmdList));
 
 	_cmdList->Close();
 

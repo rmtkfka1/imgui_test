@@ -103,6 +103,9 @@
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -163,6 +166,9 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="TableHeap.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>

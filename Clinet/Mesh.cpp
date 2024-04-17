@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "ConstantBuffer.h"
 #include "TableHeap.h"
+#include "Texture.h"
 Mesh::Mesh() 
 {
 }
@@ -54,6 +55,8 @@ void Mesh::Render()
 
 	core->GetConstantBuffer(CBV_REGISTER::b0)->SetData(&test2, sizeof(test2));
 	core->GetConstantBuffer(CBV_REGISTER::b1)->PushData(&test, sizeof(test));
+
+	core->GetTableHeap()->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
 	core->GetTableHeap()->CommitTable();
 
 	//core->GetCmdList()->SetGraphicsRoot32BitConstants(5, 4, &test2, 0);

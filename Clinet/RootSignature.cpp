@@ -3,7 +3,7 @@
 #include "Core.h"
 void RootSignature::Init()
 {
-
+	D3D12_STATIC_SAMPLER_DESC _samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
 	//D3D12_ROOT_PARAMETER param[1];
 
 		//param[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
@@ -15,12 +15,13 @@ void RootSignature::Init()
 	CD3DX12_DESCRIPTOR_RANGE ranges[] =
 	{
 		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT-1, 1), // b1~b4
+	    CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 5, 0), // t0~t4
 	};
 
 
 	CD3DX12_ROOT_PARAMETER param[2];
 	param[0].InitAsConstantBufferView(0); // b0
-	param[1].InitAsDescriptorTable(_countof(ranges), ranges);
+	param[1].InitAsDescriptorTable(_countof(ranges), ranges); 
 
 
 	D3D12_ROOT_SIGNATURE_FLAGS d3dRootSignatureFlags =

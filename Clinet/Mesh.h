@@ -1,5 +1,7 @@
 #pragma once
 
+class Texture;
+
 class Mesh
 {
 public:
@@ -9,7 +11,7 @@ public:
 
 	void Init(vector<Vertex>& vec, vector<uint32>& index);
 	void Render();
-
+	void SetTexture(shared_ptr<Texture> tex) { _tex = tex; }
 
 private:
 	void CreateVertxBuffer(vector<Vertex>& vec);
@@ -30,7 +32,7 @@ private:
 	cb test;
 	cb test2;
 
-
+	shared_ptr<Texture> _tex = {};
 
 };
 
