@@ -52,7 +52,7 @@ void Texture::CreateTexture(const wstring& path)
 	if (FAILED(hr))
 		assert(nullptr);
 
-	::UpdateSubresources(core->GetResCmdList().Get(),
+	::UpdateSubresources(core->GetResourceCmdList().Get(),
 		_tex2D.Get(),
 		textureUploadHeap.Get(),
 		0, 0,

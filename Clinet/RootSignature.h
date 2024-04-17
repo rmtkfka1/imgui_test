@@ -9,5 +9,8 @@ public:
 
 private:
 	ComPtr<ID3D12RootSignature> _rootSignature;
+	D3D12_STATIC_SAMPLER_DESC _samplerDesc;
+
+
 };
 

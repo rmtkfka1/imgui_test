@@ -53,10 +53,10 @@ void Mesh::Render()
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
-	core->GetConstantBuffer(CBV_REGISTER::b0)->SetData(&test2, sizeof(test2));
+	//core->GetConstantBuffer(CBV_REGISTER::b0)->SetData(&test2, sizeof(test2));
 	core->GetConstantBuffer(CBV_REGISTER::b1)->PushData(&test, sizeof(test));
-
 	core->GetTableHeap()->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
+
 	core->GetTableHeap()->CommitTable();
 
 	//core->GetCmdList()->SetGraphicsRoot32BitConstants(5, 4, &test2, 0);

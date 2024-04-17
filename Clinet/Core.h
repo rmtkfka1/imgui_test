@@ -20,16 +20,14 @@ public:
 	const WindowInfo& GetWindowInfo() { return _info; }
 	ComPtr<ID3D12Device> GetDevice() { return _device; }
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
-	ComPtr<ID3D12GraphicsCommandList> GetResCmdList() { return _resCmdList; }
-
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	shared_ptr<RootSignature> GetRootSignature() { return _rootSignautre; }
 	shared_ptr<ConstantBuffer> GetConstantBuffer(CBV_REGISTER type) { return _constantBuffers[static_cast<uint8>(type)]; }
 	shared_ptr<TableHeap> GetTableHeap() { return _tableHeap; }
 	ComPtr<ID3D12DescriptorHeap> GetImguiHeap() { return _imguiHeap; }
-	
-	void ResourceSet();
+	ComPtr<ID3D12GraphicsCommandList> GetResourceCmdList() { return	_resCmdList; }
 
+	void ResourceSet();
 
 private:
 
@@ -53,9 +51,8 @@ private:
 	ComPtr<ID3D12GraphicsCommandList> _cmdList;
 	ComPtr<ID3D12CommandAllocator> _cmdMemory;
 
-	ComPtr<ID3D12GraphicsCommandList> _resCmdList;
-	ComPtr<ID3D12CommandAllocator> _resCmdMemory;
-
+	ComPtr<ID3D12CommandAllocator>		_resCmdMemory;
+	ComPtr<ID3D12GraphicsCommandList>	_resCmdList;
 
 
 	ComPtr<ID3D12Fence>					_fence;

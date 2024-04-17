@@ -104,7 +104,7 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Engine</Filter>
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +169,7 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

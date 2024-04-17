@@ -40,6 +40,8 @@ void TableHeap::SetSRV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGISTER reg)
 	core->GetDevice()->CopyDescriptors(1, &destHandle, &destRange, 1, &srcHandle, &srcRange, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
+
+
 void TableHeap::CommitTable()
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE handle = _descHeap->GetGPUDescriptorHandleForHeapStart();
@@ -56,9 +58,8 @@ D3D12_CPU_DESCRIPTOR_HANDLE TableHeap::GetCPUHandle(CBV_REGISTER reg)
 
 D3D12_CPU_DESCRIPTOR_HANDLE TableHeap::GetCPUHandle(SRV_REGISTER reg)
 {
-	return GetCPUHandle(static_cast<uint8>(reg));
+	return GetCPUHandle(static_cast<uint32>(reg));
 }
-
 
 D3D12_CPU_DESCRIPTOR_HANDLE TableHeap::GetCPUHandle(uint32 reg)
 {

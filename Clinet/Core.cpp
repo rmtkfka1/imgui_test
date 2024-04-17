@@ -63,10 +63,6 @@ void Core::StartRender()
 
 		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetRootSignature().Get());
 		
-		/*for (auto& v : _constantBuffers)
-		{
-			v->Clear();
-		}*/
 
 		GetConstantBuffer(CBV_REGISTER::b1)->Clear();
 
@@ -90,6 +86,7 @@ void Core::StartRender()
 
 void Core::EndRender()
 {
+
 	_cmdList->SetDescriptorHeaps(1, _imguiHeap.GetAddressOf());
 
 	ImguiManager::GetInstance()->Render();
@@ -185,10 +182,12 @@ HRESULT Core::CreateCmdQueue()
 	result=_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdMemory));
 	result=_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _cmdMemory.Get(), nullptr, IID_PPV_ARGS(&_cmdList));
 
-	result = _device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_resCmdMemory));
-	result = _device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _resCmdMemory.Get(), nullptr, IID_PPV_ARGS(&_resCmdList));
+
+	result=_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_resCmdMemory));
+	result=_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, _resCmdMemory.Get(), nullptr, IID_PPV_ARGS(&_resCmdList));
 
 	_cmdList->Close();
+
 
 	result=_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
 	_fenceEvent = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
