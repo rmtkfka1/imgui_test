@@ -16,8 +16,6 @@ void Game::Init(WindowInfo info)
 	core->Init(_info);
 
 
-
-
 	vector<Vertex> vec(4);
 
 	vec[0].pos = vec3(-0.5f, 0.5f, 0.5f);
@@ -62,8 +60,11 @@ void Game::Run()
 	
 	_shader->SetPipelineState();
 	_mesh->SetTexture(_texture);
-	_mesh->Render();
+	{
 	
+		_mesh->Render();
+
+	}
 
 	core->EndRender();
 }

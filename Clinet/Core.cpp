@@ -20,13 +20,14 @@ void Core::Init(WindowInfo info)
 	CreateDevice();
 	CreateCmdQueue();
 	CreateSwapChain();
+	CreateDepthBuffer();
 
 
 	_rootSignautre = make_unique<RootSignature>();
 	_rootSignautre->Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(cb), 1);
-	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(cb), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 1);
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(Transform), 256);
 
 	_tableHeap = make_unique<TableHeap>();
 	_tableHeap->Init(256);
@@ -77,7 +78,11 @@ void Core::StartRender()
 		_cmdList->RSSetScissorRects(1, &_scissorRect);
 		D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = _rtvHandle[_backBufferIndex];
 		_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
-		_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
+
+		D3D12_CPU_DESCRIPTOR_HANDLE depthStencilView = _depthHeap->GetCPUDescriptorHandleForHeapStart();
+		_cmdList->ClearDepthStencilView(depthStencilView, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+		_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &depthStencilView);
 
 
 	}
@@ -253,6 +258,40 @@ HRESULT Core::CreateSwapChain()
 	}
 	return result;
 
+}
+
+HRESULT Core::CreateDepthBuffer()
+{
+	HRESULT result = S_OK;
+
+	D3D12_HEAP_PROPERTIES heapPropery = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+
+	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_D32_FLOAT, _info.width, _info.height);
+	desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+
+	D3D12_CLEAR_VALUE optimizedClearValue = CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
+
+	_device->CreateCommittedResource(
+		&heapPropery,
+		D3D12_HEAP_FLAG_NONE,
+		&desc,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE,
+		&optimizedClearValue,
+		IID_PPV_ARGS(&_depthBuffer));
+
+
+	D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
+	heapDesc.NumDescriptors = 1;
+	heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+
+	_device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&_depthHeap));
+
+	D3D12_CPU_DESCRIPTOR_HANDLE hanlde = _depthHeap->GetCPUDescriptorHandleForHeapStart();
+
+	_device->CreateDepthStencilView(_depthBuffer.Get(), nullptr, hanlde);
+
+	return result;
 }
 
 void Core::CreateConstantBuffer(CBV_REGISTER reg, uint32 bufferSize, uint32 count)

@@ -78,7 +78,7 @@ struct Vertex
 	vec2 uv;
 };
 
-struct cb
+struct Transform
 {
 	vec4 offset;
 };

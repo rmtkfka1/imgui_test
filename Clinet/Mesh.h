@@ -10,6 +10,8 @@ public:
 
 	void Init(vector<Vertex>& vec, vector<uint32>& index);
 	void Render();
+
+	void SetTransform(const Transform& t) { _transform = t; }
 	void SetTexture(shared_ptr<Texture> tex) { _tex = tex; }
 
 private:
@@ -28,8 +30,7 @@ private:
 	uint32 _indexCount = 0;
 
 
-	cb test;
-	cb test2;
+	Transform _transform;
 
 	shared_ptr<Texture> _tex = {};
 

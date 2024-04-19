@@ -16,8 +16,7 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 	CreateIndexBuffer(index);
 
 
-	test.offset = { 0.0,0.0,0.0,0.0 };
-	test2.offset = { 50.0f,0,0,0 };
+
 
 
 }
@@ -29,22 +28,22 @@ void Mesh::Render()
 
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
 	{
-		test.offset.x += 0.3f* dt;
+		_transform.offset.x += 0.3f* dt;
 		
 	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
 	{
-		test.offset.x -= 0.3f * dt;
+		_transform.offset.x -= 0.3f * dt;
 	
 	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
 	{
-		test.offset.y += 0.3f * dt;
+		_transform.offset.y += 0.3f * dt;
 		
 	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
 	{
-		test.offset.y -= 0.3f * dt;
+		_transform.offset.y -= 0.3f * dt;
 	
 	}
 
@@ -53,13 +52,12 @@ void Mesh::Render()
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
-	//core->GetConstantBuffer(CBV_REGISTER::b0)->SetData(&test2, sizeof(test2));
-	core->GetConstantBuffer(CBV_REGISTER::b1)->PushData(&test, sizeof(test));
+
+	core->GetConstantBuffer(CBV_REGISTER::b1)->PushData(&_transform, sizeof(_transform));
 	core->GetTableHeap()->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
 
 	core->GetTableHeap()->CommitTable();
 
-	//core->GetCmdList()->SetGraphicsRoot32BitConstants(5, 4, &test2, 0);
 
 
 	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);

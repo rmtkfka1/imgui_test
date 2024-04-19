@@ -36,6 +36,8 @@ private:
 	HRESULT CreateDevice();
 	HRESULT CreateCmdQueue();
 	HRESULT CreateSwapChain();
+	HRESULT CreateDepthBuffer();
+
 	void CreateConstantBuffer(CBV_REGISTER reg, uint32 bufferSize, uint32 count);
 
 
@@ -61,12 +63,16 @@ private:
 
 
 	ComPtr<ID3D12DescriptorHeap> _imguiHeap;
+
 	//SwapChain
 	ComPtr<IDXGISwapChain> _swapChain;
 	array<ComPtr<ID3D12Resource>, 2> _rtvBuffer;
 	ComPtr<ID3D12DescriptorHeap> _rtvHeap;
 	array< D3D12_CPU_DESCRIPTOR_HANDLE, 2> _rtvHandle;
 	uint32					_backBufferIndex = 0;
+
+	ComPtr<ID3D12Resource> _depthBuffer;
+	ComPtr<ID3D12DescriptorHeap> _depthHeap;
 
 
 
