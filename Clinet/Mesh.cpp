@@ -15,53 +15,8 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 	CreateVertxBuffer(vec);
 	CreateIndexBuffer(index);
 
-
-
-
-
 }
 
-void Mesh::Render()
-{
-
-	float dt = TimeManager::GetInstance()->GetDeltaTime();
-
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
-	{
-		_transform.offset.x += 0.3f* dt;
-		
-	}
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
-	{
-		_transform.offset.x -= 0.3f * dt;
-	
-	}
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
-	{
-		_transform.offset.y += 0.3f * dt;
-		
-	}
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
-	{
-		_transform.offset.y -= 0.3f * dt;
-	
-	}
-
-
-	core->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
-	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
-
-
-	core->GetConstantBuffer(CBV_REGISTER::b1)->PushData(&_transform, sizeof(_transform));
-	core->GetTableHeap()->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
-
-	core->GetTableHeap()->CommitTable();
-
-
-
-	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
-}
 
 void Mesh::CreateVertxBuffer(vector<Vertex>& vec)
 {

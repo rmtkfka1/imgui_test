@@ -9,10 +9,10 @@ public:
 	~Mesh();
 
 	void Init(vector<Vertex>& vec, vector<uint32>& index);
-	void Render();
+	D3D12_VERTEX_BUFFER_VIEW& GetVertexView() { return _vertexBufferView; }
+	D3D12_INDEX_BUFFER_VIEW& GetIndexView() { return _indexBufferView; }
 
-	void SetTransform(const Transform& t) { _transform = t; }
-	void SetTexture(shared_ptr<Texture> tex) { _tex = tex; }
+	uint32 GetIndexCount() { return _indexCount; }
 
 private:
 	void CreateVertxBuffer(vector<Vertex>& vec);
@@ -30,9 +30,6 @@ private:
 	uint32 _indexCount = 0;
 
 
-	Transform _transform;
-
-	shared_ptr<Texture> _tex = {};
 
 };
 
