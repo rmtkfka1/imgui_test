@@ -61,7 +61,7 @@ private:
 	uint32								_fenceValue = 0;
 	HANDLE								_fenceEvent = INVALID_HANDLE_VALUE;
 
-
+	//ImGUI
 	ComPtr<ID3D12DescriptorHeap> _imguiHeap;
 
 	//SwapChain
@@ -71,10 +71,9 @@ private:
 	array< D3D12_CPU_DESCRIPTOR_HANDLE, 2> _rtvHandle;
 	uint32					_backBufferIndex = 0;
 
+	//depthBuffer
 	ComPtr<ID3D12Resource> _depthBuffer;
 	ComPtr<ID3D12DescriptorHeap> _depthHeap;
-
-
 
 
 

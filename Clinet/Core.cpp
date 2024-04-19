@@ -26,8 +26,10 @@ void Core::Init(WindowInfo info)
 	_rootSignautre = make_unique<RootSignature>();
 	_rootSignautre->Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 1);
-	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(Transform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Matrix), 1);
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(Matrix), 256);
+	CreateConstantBuffer(CBV_REGISTER::b2, sizeof(Matrix) * 2, 256);
+
 
 	_tableHeap = make_unique<TableHeap>();
 	_tableHeap->Init(256);
@@ -66,6 +68,7 @@ void Core::StartRender()
 		
 
 		GetConstantBuffer(CBV_REGISTER::b1)->Clear();
+		GetConstantBuffer(CBV_REGISTER::b2)->Clear();
 
 		_tableHeap->Clear();
 

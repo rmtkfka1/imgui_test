@@ -78,10 +78,9 @@ struct Vertex
 	vec2 uv;
 };
 
-struct Transform
-{
-	vec4 offset;
-};
+
+
+
 
 extern unique_ptr<class Core> core;
 
@@ -106,6 +105,7 @@ enum class SRV_REGISTER : uint8
 
 	END
 };
+
 
 enum
 {

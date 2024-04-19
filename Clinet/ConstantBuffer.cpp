@@ -80,7 +80,7 @@ void ConstantBuffer::Clear()
 	_currentIndex = 0;
 }
 
-void ConstantBuffer::PushData(void* buffer, uint32 size)
+void ConstantBuffer::BindTransform(void* buffer, uint32 size)
 {
 	assert(_currentIndex <  _elementCount);
 
@@ -88,7 +88,7 @@ void ConstantBuffer::PushData(void* buffer, uint32 size)
 
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(_cpuHandleBegin, _currentIndex * _handleIncrementSize);
 
-	core->GetTableHeap()->SetCBV(cpuHandle, _reg);
+	core->GetTableHeap()->BindConstant(cpuHandle, _reg);
 
 	_currentIndex++;
 

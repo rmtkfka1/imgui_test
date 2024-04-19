@@ -22,7 +22,7 @@ void TableHeap::Clear()
 	_currentGroupIndex = 0;
 }
 
-void TableHeap::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER reg)
+void TableHeap::BindConstant(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER reg)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
 
@@ -31,7 +31,7 @@ void TableHeap::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER reg)
 	core->GetDevice()->CopyDescriptors(1, &destHandle, &destRange, 1, &srcHandle, &srcRange, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
-void TableHeap::SetSRV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGISTER reg)
+void TableHeap::BindTexture(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGISTER reg)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
 

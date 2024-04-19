@@ -127,6 +127,12 @@
     <ClInclude Include="Stage1.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -203,6 +209,12 @@
     </ClCompile>
     <ClCompile Include="Stage1.cpp">
       <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

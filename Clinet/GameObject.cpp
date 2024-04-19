@@ -6,33 +6,43 @@
 #include "ConstantBuffer.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Transform.h"
 void GameObject::Init()
 {
+	_transform = make_shared<Transform>();
 }
 
 void GameObject::Update()
 {
 	float dt = TimeManager::GetInstance()->GetDeltaTime();
 
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
-	{
-		_transform.offset.x += 0.3f * dt;
-
-	}
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
-	{
-		_transform.offset.x -= 0.3f * dt;
-
-	}
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
 	{
-		_transform.offset.y += 0.3f * dt;
-
+		vec3 pos  =_transform->GetLocalPosition();
+		pos.z += 0.3f * dt;
+		_transform->SetLocalPosition(pos);
 	}
+
+
 	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
 	{
-		_transform.offset.y -= 0.3f * dt;
+		vec3 pos = _transform->GetLocalPosition();
+		pos.z -= 0.3f * dt;
+		_transform->SetLocalPosition(pos);
+	}
 
+	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
+	{
+		vec3 pos = _transform->GetLocalPosition();
+		pos.x += 0.3f * dt;
+		_transform->SetLocalPosition(pos);
+	}
+
+	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
+	{
+		vec3 pos = _transform->GetLocalPosition();
+		pos.x -= 0.3f * dt;
+		_transform->SetLocalPosition(pos);
 	}
 }
 
@@ -49,8 +59,8 @@ void GameObject::Render()
 	core->GetCmdList()->IASetVertexBuffers(0, 1, &_mesh->GetVertexView()); // Slot: (0~15)
 	core->GetCmdList()->IASetIndexBuffer(&_mesh->GetIndexView());
 
-	core->GetConstantBuffer(CBV_REGISTER::b1)->PushData(&_transform, sizeof(_transform));
-	core->GetTableHeap()->SetSRV(_texture->GetCpuHandle(), SRV_REGISTER::t0);
+	_transform->Update();
+	core->GetTableHeap()->BindTexture(_texture->GetCpuHandle(), SRV_REGISTER::t0);
 
 	core->GetTableHeap()->CommitTable();
 	core->GetCmdList()->DrawIndexedInstanced(_mesh->GetIndexCount(), 1, 0, 0, 0);

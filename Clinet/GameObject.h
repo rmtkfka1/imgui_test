@@ -3,6 +3,7 @@
 class Mesh;
 class Texture;
 class Shader;
+class Transform;
 
 class GameObject
 {
@@ -18,7 +19,7 @@ public:
 
 private:
 
-	Transform _transform;
+	shared_ptr<Transform> _transform;
 	shared_ptr<Mesh> _mesh;
 	shared_ptr<Shader> _shader;
 	shared_ptr<Texture> _texture;

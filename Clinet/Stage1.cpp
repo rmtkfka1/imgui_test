@@ -6,7 +6,7 @@
 #include "Texture.h"
 #include "SceneManger.h"
 #include "GameObject.h"
-
+#include "CameraManager.h"
 
 Stage1::Stage1()
 {
@@ -21,6 +21,7 @@ Stage1::~Stage1()
 
 void Stage1::Init()
 {
+
 	{
 		shared_ptr<GameObject> gameObject = make_shared<GameObject>();
 
@@ -68,22 +69,21 @@ void Stage1::Init()
 		AddGameObject(gameObject);
 	}
 
+
+	Super::Init();
 }
 
 void Stage1::Update()
 {
-	for (auto& i : _gameObjects)
-	{
-		i->Update();
-	}
+	CameraManager::GetInstance()->Update();
+	Super::Update();
+
+
 }
 
 void Stage1::Render()
 {
-
-
-	for (auto& i : _gameObjects)
-	{
-		i->Render();
-	}
+	Super::Render();
 }
+
+

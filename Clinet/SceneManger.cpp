@@ -41,7 +41,7 @@ void SceneManger::ChangeScene(SceneType type)
 	}
 
 	_sceneType = type;
-	_scene->Init();
+
 
 }
 

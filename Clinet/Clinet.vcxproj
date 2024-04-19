@@ -149,6 +149,7 @@
     <ClInclude Include="..\Library\Include\Imgui\imstb_rectpack.h" />
     <ClInclude Include="..\Library\Include\Imgui\imstb_textedit.h" />
     <ClInclude Include="..\Library\Include\Imgui\imstb_truetype.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Clinet.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="d3dx12.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Library\Include\Imgui\imgui.cpp" />
@@ -180,6 +182,7 @@
     <ClCompile Include="..\Library\Include\Imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\Library\Include\Imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Library\Include\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Clinet.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -203,6 +206,7 @@
     <ClCompile Include="TableHeap.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Clinet.rc" />
