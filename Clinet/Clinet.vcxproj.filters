@@ -35,6 +35,9 @@
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{02248e2a-024c-43e6-9cdf-cbbed0e4ff23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Assimp">
+      <UniqueIdentifier>{bb90f2d9-b05f-414c-933f-cd79961c0521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clinet.h">
@@ -133,6 +136,24 @@
     <ClInclude Include="CameraManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Converter.h">
+      <Filter>Utils\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpTool.h">
+      <Filter>Utils\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="AsTypes.h">
+      <Filter>Utils\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Utils\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtils.h">
+      <Filter>Utils\Assimp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -216,6 +237,21 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Converter.cpp">
+      <Filter>Utils\Assimp</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpTool.cpp">
+      <Filter>Utils\Assimp</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Utils\Assimp</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtils.cpp">
+      <Filter>Utils\Assimp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Clinet.rc">
@@ -237,5 +273,10 @@
     <None Include="..\Resources\Shader\default.hlsli">
       <Filter>Resource\Shader</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="AssimpGuide.txt">
+      <Filter>Utils\Assimp</Filter>
+    </Text>
   </ItemGroup>
 </Project>

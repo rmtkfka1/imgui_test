@@ -149,14 +149,19 @@
     <ClInclude Include="..\Library\Include\Imgui\imstb_rectpack.h" />
     <ClInclude Include="..\Library\Include\Imgui\imstb_textedit.h" />
     <ClInclude Include="..\Library\Include\Imgui\imstb_truetype.h" />
+    <ClInclude Include="AssimpTool.h" />
+    <ClInclude Include="AsTypes.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Clinet.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Converter.h" />
     <ClInclude Include="d3dx12.h" />
+    <ClInclude Include="FileUtils.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="ImguiManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Mesh.h" />
@@ -172,6 +177,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,12 +188,16 @@
     <ClCompile Include="..\Library\Include\Imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\Library\Include\Imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Library\Include\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="AssimpTool.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Clinet.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Converter.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="ImguiManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -206,6 +216,10 @@
     <ClCompile Include="TableHeap.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="tinyxml2.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +232,12 @@
   <ItemGroup>
     <None Include="..\Resources\Shader\default.hlsli" />
     <None Include="SimpleMath.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="AssimpGuide.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

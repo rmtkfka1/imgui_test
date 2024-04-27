@@ -35,6 +35,12 @@ using namespace Microsoft::WRL;
 #include "SimpleMath.h"
 #include "SimpleMath.inl"
 
+#include <Assimp/Importer.hpp>
+#include <Assimp/scene.h>
+#include <Assimp/postprocess.h>
+
+
+
 // °¢Á¾ lib
 #pragma comment(lib, "d3d12")
 #pragma comment(lib, "dxgi")
@@ -43,8 +49,11 @@ using namespace Microsoft::WRL;
 
 #ifdef _DEBUG
 #pragma comment(lib, "DirectXTex\\DirectXTex_debug.lib")
+#pragma comment(lib, "Assimp/assimp-vc143-mtd.lib")
+
 #else
 #pragma comment(lib, "DirectXTex\\DirectXTex.lib")
+#pragma comment(lib, "Assimp/assimp-vc143-mt.lib")
 #endif
 
 using int8 = __int8;
@@ -59,10 +68,11 @@ using vec2 = DirectX::SimpleMath::Vector2;
 using vec3 = DirectX::SimpleMath::Vector3;
 using vec4 = DirectX::SimpleMath::Vector4;
 using Matrix = DirectX::SimpleMath::Matrix;
+using Color = DirectX::XMFLOAT4;
 
 #include "KeyManager.h"
 #include "TimeManager.h"
-
+#include "Helper.h"
 struct WindowInfo
 {
 	int width;
@@ -78,9 +88,15 @@ struct Vertex
 	vec2 uv;
 };
 
-
-
-
+struct VertexTextureNormalTangentBlendData
+{
+	vec3 position = { 0, 0, 0 };
+	vec2 uv = { 0, 0 };
+	vec3 normal = { 0, 0, 0 };
+	vec3 tangent = { 0, 0, 0 };
+	vec4 blendIndices = { 0, 0, 0, 0 };
+	vec4 blendWeights = { 0, 0, 0, 0 };
+};
 
 extern unique_ptr<class Core> core;
 

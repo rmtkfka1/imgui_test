@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "Core.h"
 #include "ImguiManager.h"
-
+#include <iostream>
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #define MAX_LOADSTRING 100
 
@@ -59,7 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             } 
-
+       
         }
 
         game->Run();

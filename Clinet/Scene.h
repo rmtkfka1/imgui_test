@@ -17,6 +17,8 @@ public:
 
 
 protected:
+
+	//TODO LIst: 트리구조로 만들어보기
 	vector<shared_ptr<GameObject>> _gameObjects;
 };
 
