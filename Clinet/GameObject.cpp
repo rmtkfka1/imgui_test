@@ -7,62 +7,112 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Transform.h"
+#include "Component.h"
+#include "MonoBehaviour.h"
+#include "MeshRenderer.h"
+
+GameObject::GameObject()
+{
+}
+
+GameObject::~GameObject()
+{
+}
+
 void GameObject::Init()
 {
-	_transform = make_shared<Transform>();
+
+}
+
+void GameObject::Awake()
+{
+	for (shared_ptr<Component>& component : _components)
+	{
+		if (component)
+			component->Awake();
+	}
+
+	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	{
+		script->Awake();
+	}
+}
+
+void GameObject::Start()
+{
+
+	for (shared_ptr<Component>& component : _components)
+	{
+		if (component)
+			component->Start();
+	}
+
+	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	{
+		script->Start();
+	}
 }
 
 void GameObject::Update()
 {
-	float dt = TimeManager::GetInstance()->GetDeltaTime();
-
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::W))
+	for (shared_ptr<Component>& component : _components)
 	{
-		vec3 pos  =_transform->GetLocalPosition();
-		pos.z += 0.3f * dt;
-		_transform->SetLocalPosition(pos);
+		if (component)
+			component->Update();
 	}
 
-
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::S))
+	for (shared_ptr<MonoBehaviour>& script : _scripts)
 	{
-		vec3 pos = _transform->GetLocalPosition();
-		pos.z -= 0.3f * dt;
-		_transform->SetLocalPosition(pos);
-	}
-
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::D))
-	{
-		vec3 pos = _transform->GetLocalPosition();
-		pos.x += 0.3f * dt;
-		_transform->SetLocalPosition(pos);
-	}
-
-	if (KeyManager::GetInstance()->GetButton(KEY_TYPE::A))
-	{
-		vec3 pos = _transform->GetLocalPosition();
-		pos.x -= 0.3f * dt;
-		_transform->SetLocalPosition(pos);
+		script->Update();
 	}
 }
 
-void GameObject::Render()
+void GameObject::LateUpdate()
 {
+	for (shared_ptr<Component>& component : _components)
+	{
+		if (component)
+			component->LateUpdate();
+	}
 
-	assert(_mesh);
-	assert(_texture);
+	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	{
+		script->LateUpdate();
+	}
+}
+
+shared_ptr<Component> GameObject::GetFixedComponent(COMPONENT_TYPE type)
+{
+	uint8 index = static_cast<uint8>(type);
+	assert(index < FIXED_COMPONENT_COUNT);
+	return _components[index];
+}
+
+shared_ptr<MeshRenderer> GameObject::GetMeshRenderer()
+{
+	shared_ptr<Component> component = GetFixedComponent(COMPONENT_TYPE::MESH_RENDERER);
+	return static_pointer_cast<MeshRenderer>(component);
+}
 
 
-	_shader->SetPipelineState();
+shared_ptr<Transform> GameObject::GetTransform()
+{
+	uint8 index = static_cast<uint8>(COMPONENT_TYPE::TRANSFORM);
+	return static_pointer_cast<Transform>(_components[index]);
+}
 
-	core->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	core->GetCmdList()->IASetVertexBuffers(0, 1, &_mesh->GetVertexView()); // Slot: (0~15)
-	core->GetCmdList()->IASetIndexBuffer(&_mesh->GetIndexView());
+void GameObject::AddComponent(shared_ptr<Component> component)
+{
+	component->SetGameObject(shared_from_this());
 
-	_transform->Update();
-	core->GetTableHeap()->BindTexture(_texture->GetCpuHandle(), SRV_REGISTER::t0);
-
-	core->GetTableHeap()->CommitTable();
-	core->GetCmdList()->DrawIndexedInstanced(_mesh->GetIndexCount(), 1, 0, 0, 0);
+	uint8 index = static_cast<uint8>(component->GetType());
+	if (index < FIXED_COMPONENT_COUNT)
+	{
+		_components[index] = component;
+	}
+	else
+	{
+		_scripts.push_back(dynamic_pointer_cast<MonoBehaviour>(component));
+	}
 
 }

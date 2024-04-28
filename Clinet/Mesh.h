@@ -13,6 +13,7 @@ public:
 	D3D12_INDEX_BUFFER_VIEW& GetIndexView() { return _indexBufferView; }
 
 	uint32 GetIndexCount() { return _indexCount; }
+	void Render();
 
 private:
 	void CreateVertxBuffer(vector<Vertex>& vec);

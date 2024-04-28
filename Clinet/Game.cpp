@@ -13,26 +13,28 @@ AssimpTool assimpTool;
 
 void Game::Init(WindowInfo info)
 {
-	//_info = info;
+	_info = info;
 
-	//core->Init(_info);
+	core->Init(_info);
 
-	//SceneManger::GetInstance()->ChangeScene(SceneType::STAGE1);
-	//SceneManger::GetInstance()->Init();
+	SceneManger::GetInstance()->ChangeScene(SceneType::STAGE1);
+	SceneManger::GetInstance()->Init();
+	SceneManger::GetInstance()->Awake();
+	SceneManger::GetInstance()->Start();
 
-	assimpTool.Init();
 }
 
 void Game::Run()
 {
-	//core->Update();
-	//core->StartRender();
+	core->Update();
+	core->StartRender();
 
-	//SceneManger::GetInstance()->Update();
-	//SceneManger::GetInstance()->Render();
-	//
-	//core->EndRender();
 
-	assimpTool.Update();
-	assimpTool.Render();
+	SceneManger::GetInstance()->Update();
+	SceneManger::GetInstance()->LateUpdate();
+
+	
+	core->EndRender();
+
+
 }

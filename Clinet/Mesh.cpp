@@ -18,6 +18,16 @@ void Mesh::Init(vector<Vertex>& vec, vector<uint32>& index)
 }
 
 
+void Mesh::Render()
+{
+	core->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	core->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView); // Slot: (0~15)
+	core->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
+
+	core->GetTableHeap()->CommitTable();
+	core->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
+}
+
 void Mesh::CreateVertxBuffer(vector<Vertex>& vec)
 {
 	_vertexCount = static_cast<uint32>(vec.size());

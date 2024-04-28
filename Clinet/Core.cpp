@@ -6,6 +6,10 @@
 #include "KeyManager.h"
 #include "ConstantBuffer.h"
 #include "TableHeap.h"
+#include "Material.h"
+
+
+
 void Core::Init(WindowInfo info)
 {
 	_info = info;
@@ -26,10 +30,8 @@ void Core::Init(WindowInfo info)
 	_rootSignautre = make_unique<RootSignature>();
 	_rootSignautre->Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Matrix), 1);
-	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(Matrix), 256);
-	CreateConstantBuffer(CBV_REGISTER::b2, sizeof(Matrix) * 2, 256);
-
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformParams), 256);
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	_tableHeap = make_unique<TableHeap>();
 	_tableHeap->Init(256);
@@ -63,12 +65,11 @@ void Core::StartRender()
 			D3D12_RESOURCE_STATE_RENDER_TARGET); // 외주 결과물
 
 
-
-		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetRootSignature().Get());
+		_cmdList->SetGraphicsRootSignature(_rootSignautre->GetSignature().Get());
 		
 
-		GetConstantBuffer(CBV_REGISTER::b1)->Clear();
-		GetConstantBuffer(CBV_REGISTER::b2)->Clear();
+		GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->Clear();
+		GetConstantBuffer(CONSTANT_BUFFER_TYPE::MATERIAL)->Clear();
 
 		_tableHeap->Clear();
 
@@ -84,7 +85,6 @@ void Core::StartRender()
 
 		D3D12_CPU_DESCRIPTOR_HANDLE depthStencilView = _depthHeap->GetCPUDescriptorHandleForHeapStart();
 		_cmdList->ClearDepthStencilView(depthStencilView, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
-
 		_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &depthStencilView);
 
 

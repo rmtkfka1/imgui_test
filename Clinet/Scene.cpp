@@ -12,29 +12,51 @@ Scene::~Scene()
 {
 }
 
+
 void Scene::Init()
 {
-	for (auto& i : _gameObjects)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
-		i->Init();
+		gameObject->Init();
 	}
 }
+
+
+void Scene::Awake()
+{
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
+	{
+		gameObject->Awake();
+	}
+}
+
+void Scene::Start()
+{
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
+	{
+		gameObject->Start();
+	}
+}
+
+
 
 void Scene::Update()
 {
-	for (auto& i : _gameObjects)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
-		i->Update();
+		gameObject->Update();
 	}
 }
 
-void Scene::Render()
+void Scene::LateUpdate()
 {
-	for (auto& i : _gameObjects)
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
-		i->Render();
+		gameObject->LateUpdate();
 	}
+
 }
+
 
 void Scene::AddGameObject(shared_ptr<GameObject> object)
 {

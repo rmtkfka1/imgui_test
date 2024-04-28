@@ -22,7 +22,7 @@ void Shader::Init(const wstring& path)
 	};
 
 	_pipelineDesc.InputLayout = { desc, _countof(desc) };
-	_pipelineDesc.pRootSignature = core->GetRootSignature()->GetRootSignature().Get();
+	_pipelineDesc.pRootSignature = core->GetRootSignature()->GetSignature().Get();
 
 	_pipelineDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 	_pipelineDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);

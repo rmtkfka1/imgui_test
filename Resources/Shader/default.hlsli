@@ -1,21 +1,28 @@
 
-cbuffer TEST_B0 : register(b0)
+cbuffer TRANSFORM_PARAMS : register(b0)
 {
-    float4 offset0;
+    row_major matrix matWVP;
 };
 
-cbuffer TEST_B1 : register(b1)
+cbuffer MATERIAL_PARAMS : register(b1)
 {
-    row_major matrix WorldMatrix;
-};
-
-cbuffer TEST_B2 : register(b2)
-{
-    row_major matrix ViewMatrix;
-    row_major matrix ProjectionMatrix;
+    int int_0;
+    int int_1;
+    int int_2;
+    int int_3;
+    int int_4;
+    float float_0;
+    float float_1;
+    float float_2;
+    float float_3;
+    float float_4;
 };
 
 Texture2D tex_0 : register(t0);
+Texture2D tex_1 : register(t1);
+Texture2D tex_2 : register(t2);
+Texture2D tex_3 : register(t3);
+Texture2D tex_4 : register(t4);
 
 SamplerState sam_0 : register(s0);
 
@@ -35,13 +42,9 @@ struct VS_OUT
 
 VS_OUT VS_Main(VS_IN input)
 {
-    VS_OUT output = (VS_OUT)0;
+    VS_OUT output = (VS_OUT) 0;
 
-    output.pos = float4(input.pos, 1.f);
-    output.pos = mul(output.pos, WorldMatrix);
-    output.pos = mul(output.pos, ViewMatrix);
-    output.pos = mul(output.pos, ProjectionMatrix);
-    
+    output.pos = mul(float4(input.pos, 1.f), matWVP);
     output.color = input.color;
     output.uv = input.uv;
 

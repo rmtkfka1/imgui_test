@@ -24,14 +24,17 @@ public:
 
 
 public:
-	void Init();
-	void Update();
-	void Render();
+
+	 void Init();
+	 void Awake();
+	 void Start();
+	 void Update();
+	 void LateUpdate();
 
 public:
 
 	void ChangeScene(SceneType type);
-
+	shared_ptr<Scene>  GetActiveScene() { return _scene; }
 
 private:
 

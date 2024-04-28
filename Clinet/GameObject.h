@@ -1,29 +1,34 @@
 #pragma once
 
-class Mesh;
-class Texture;
-class Shader;
-class Transform;
+class Component;
+class MonoBehaviour;
+class MeshRenderer;
+class Camera;
 
-class GameObject
+#include "Component.h"
+
+class GameObject : public enable_shared_from_this<GameObject>
 {
 
 public:
-	void Init();
-	void Update();
-	void Render();
+	GameObject();
+	virtual ~GameObject();
 
-	void SetMesh(shared_ptr<Mesh> mesh) { _mesh = mesh; }
-	void SetTexture(shared_ptr<Texture> texture) { _texture = texture; }
-	void SetShader(shared_ptr<Shader> shader) { _shader = shader; }
+	virtual void Init();
+	virtual void Awake();
+	virtual void Start();
+	virtual void Update();
+	virtual void LateUpdate();
 
+	shared_ptr<Component> GetFixedComponent(COMPONENT_TYPE type);
+	shared_ptr<MeshRenderer> GetMeshRenderer();
+	shared_ptr<Transform> GetTransform();
+
+	void AddComponent(shared_ptr<Component> component);
+	
 private:
-
-	shared_ptr<Transform> _transform;
-	shared_ptr<Mesh> _mesh;
-	shared_ptr<Shader> _shader;
-	shared_ptr<Texture> _texture;
-
+	array<shared_ptr<Component>, FIXED_COMPONENT_COUNT> _components;
+	vector<shared_ptr<MonoBehaviour>> _scripts;
 
 };
 

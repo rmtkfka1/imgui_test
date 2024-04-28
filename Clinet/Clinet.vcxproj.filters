@@ -38,6 +38,9 @@
     <Filter Include="Utils\Assimp">
       <UniqueIdentifier>{bb90f2d9-b05f-414c-933f-cd79961c0521}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Object\Component">
+      <UniqueIdentifier>{05bd558a-19ef-4892-aae4-6cb66e83896a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clinet.h">
@@ -94,9 +97,6 @@
     <ClInclude Include="Shader.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="ImguiManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
@@ -118,9 +118,6 @@
     <ClInclude Include="Texture.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManger.h">
-      <Filter>Engine\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
@@ -129,12 +126,6 @@
     </ClInclude>
     <ClInclude Include="Stage1.h">
       <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Converter.h">
       <Filter>Utils\Assimp</Filter>
@@ -153,6 +144,33 @@
     </ClInclude>
     <ClInclude Include="FileUtils.h">
       <Filter>Utils\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManger.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Contents\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>Contents\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehaviour.h">
+      <Filter>Contents\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Contents\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScript.h">
+      <Filter>Contents\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Contents\Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -198,9 +216,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="ImguiManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
@@ -219,9 +234,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManger.cpp">
-      <Filter>Engine\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
@@ -230,12 +242,6 @@
     </ClCompile>
     <ClCompile Include="Stage1.cpp">
       <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Converter.cpp">
       <Filter>Utils\Assimp</Filter>
@@ -251,6 +257,33 @@
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
       <Filter>Utils\Assimp</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManger.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Contents\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>Contents\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBehaviour.cpp">
+      <Filter>Contents\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Contents\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScript.cpp">
+      <Filter>Contents\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Contents\Object\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

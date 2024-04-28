@@ -2,6 +2,17 @@
 #include "Transform.h"
 #include "Core.h"
 #include "ConstantBuffer.h"
+#include "Camera.h"
+
+Transform::Transform() : Component(COMPONENT_TYPE::TRANSFORM)
+{
+}
+
+Transform::~Transform()
+{
+}
+
+
 void Transform::Update()
 {
 	Matrix matScale = Matrix::CreateScale(_localScale);
@@ -19,6 +30,14 @@ void Transform::Update()
 		_matWorld *= parent->GetLocalToWorldMatrix();
 	}
 
-	core->GetConstantBuffer(CBV_REGISTER::b1)->BindTransform(&_matWorld, sizeof(_matWorld));
+
 }
+
+void Transform::PushData()
+{
+	Matrix matWVP = _matWorld * Camera::S_MatView * Camera::S_MatProjection;
+	core->GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&matWVP, sizeof(matWVP));
+}
+
+
 

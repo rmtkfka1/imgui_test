@@ -4,7 +4,7 @@
 class RootSignature;
 class ConstantBuffer;
 class TableHeap;
-
+#include "ConstantBuffer.h"
 class Core
 {
 public:
@@ -22,7 +22,7 @@ public:
 	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return _cmdList; }
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	shared_ptr<RootSignature> GetRootSignature() { return _rootSignautre; }
-	shared_ptr<ConstantBuffer> GetConstantBuffer(CBV_REGISTER type) { return _constantBuffers[static_cast<uint8>(type)]; }
+	shared_ptr<ConstantBuffer> GetConstantBuffer(CONSTANT_BUFFER_TYPE type) { return _constantBuffers[static_cast<uint8>(type)]; }
 	shared_ptr<TableHeap> GetTableHeap() { return _tableHeap; }
 	ComPtr<ID3D12DescriptorHeap> GetImguiHeap() { return _imguiHeap; }
 	ComPtr<ID3D12GraphicsCommandList> GetResourceCmdList() { return	_resCmdList; }

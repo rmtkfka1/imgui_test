@@ -88,6 +88,11 @@ struct Vertex
 	vec2 uv;
 };
 
+struct TransformParams
+{
+	Matrix matWVP;
+};
+
 struct VertexTextureNormalTangentBlendData
 {
 	vec3 position = { 0, 0, 0 };
@@ -99,7 +104,6 @@ struct VertexTextureNormalTangentBlendData
 };
 
 extern unique_ptr<class Core> core;
-
 enum class CBV_REGISTER : uint8
 {
 	b0,
@@ -121,7 +125,6 @@ enum class SRV_REGISTER : uint8
 
 	END
 };
-
 
 enum
 {

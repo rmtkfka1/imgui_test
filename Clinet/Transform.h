@@ -1,13 +1,17 @@
 #pragma once
-class Transform
+#include "Component.h"
+
+class Transform : public Component
 {
 public:
 
-	void Update();
 
-
+	virtual void Update() override;
+	void PushData();
 
 public:
+	Transform();
+	virtual ~Transform();
 	// Parent 기준
 	const vec3& GetLocalPosition() { return _localPosition; }
 	const vec3& GetLocalRotation() { return _localRotation; }
@@ -30,8 +34,8 @@ public:
 
 private:
 	// Parent 기준
-	vec3 _localPosition = {};
-	vec3 _localRotation = {};
+	vec3 _localPosition = {0.0f,0.0f,0.0f};
+	vec3 _localRotation = {0.0f,0.0f,0.0f};
 	vec3 _localScale = { 1.f, 1.f, 1.f };
 
 	Matrix _matLocal = {};

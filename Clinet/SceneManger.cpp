@@ -2,11 +2,24 @@
 #include "SceneManger.h"
 #include "Scene.h"
 #include "Stage1.h"
+#include "GameObject.h"
+
 void SceneManger::Init()
 {
 	if (_scene)
 		_scene->Init();
+}
 
+void SceneManger::Awake()
+{
+	if (_scene)
+		_scene->Awake();
+}
+
+void SceneManger::Start()
+{
+	if (_scene)
+		_scene->Start();
 }
 
 void SceneManger::Update()
@@ -15,11 +28,14 @@ void SceneManger::Update()
 		_scene->Update();
 }
 
-void SceneManger::Render()
+void SceneManger::LateUpdate()
 {
 	if (_scene)
-		_scene->Render();
+		_scene->LateUpdate();
 }
+
+
+
 
 void SceneManger::ChangeScene(SceneType type)
 {
